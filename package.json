@@ -1,0 +1,14 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "weather pp",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Me",
+  "license": "ISC",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
+}
