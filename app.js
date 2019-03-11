@@ -15,7 +15,7 @@ standard_input.on('data', data => {
             request(`https://api.darksky.net/forecast/${credentials.DARK_SKY_SECRET_KEY}/${latitude},${longitude}?lang=es&units=si`, (e, r, b) => {
                 if (!e) {
                     const body = JSON.parse(b);
-                    console.log(body.daily.summary);
+                    console.log(`${body.daily.summary} Actualmente está a ${body.currently.temperature}ºC. Precipitación de ${body.daily.data[0].precipProbability * 100}%.`);
                 } else {
                     console.log(`Ocurrió un error al buscar la información del clima: ${e}`)
                 }
