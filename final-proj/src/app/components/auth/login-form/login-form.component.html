@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="background-section">
+    <h1 class="title"></h1>
+    <p class="description"></p>
+  </div>
+  <div class="form-section">
+    <form [formGroup]="loginForm">
+      <h1>INGRESA A TU CUENTA</h1>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Correo electrónico</mat-label>
+        <input type="email" matInput formControlName="email">
+        <mat-icon class="material-icons-outlined icon" matSuffix>email</mat-icon>
+        <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-icon class="material-icons-outlined icon" matSuffix>vpn_key</mat-icon>
+        <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <div class="remember">
+        <mat-checkbox class="checkbox" formControlName="remember">Recordar cuenta</mat-checkbox>
+        <a href="/auth/password-recovery" class="password-recovery">Recuperar contraseña</a>
+      </div>
+      <button mat-raised-button (click)="onLoginClick()">INICIAR SESIÓN</button>
+      <div class="register">
+        <p>¿No tienes cuenta?</p>
+        <a href="/auth/registration">Crear una cuenta</a>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -1,0 +1,153 @@
+@import '../../../../styles.scss';
+
+.container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    place-content: stretch flex-start;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.background-section {
+    width: 100%;
+    height: 100%;
+    flex: 1 1 0%;
+    box-sizing: border-box;
+    background-color: $primary;
+    padding: 128px;
+}
+
+.form-section {
+    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
+    box-shadow: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+    height: 100%;
+    overflow-y: scroll;
+    background-color: white;
+}
+
+form {
+    padding: 128px 48px 0px 48px;
+}
+p{
+  margin: 10px;
+}
+h1 {
+    font-size: 21px;
+    font-family: $app-font;
+    font-weight: 400;
+    text-align: left;
+    line-height: 1.4!important;
+    letter-spacing: -.1px!important;
+    margin-bottom: 25px;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1;
+    color: white;
+}
+
+.description {
+    font-size: 18px;
+    font-family: $app-font;
+    color: white;
+}
+
+.form-field {
+    width: 100%;
+}
+
+.icon {
+    color: rgba(0,0,0,.54);
+}
+
+.remember {
+    width: 80%;
+    margin: auto;
+    align-items: center;
+}
+
+a {
+    color: $accent;
+}
+
+.checkbox {
+    margin-top: 25px;
+    line-height: 24px;
+    width: 100%;
+}
+
+button {
+    width: 100%;
+    background-color: $accent;
+    margin-top: 30px;
+}
+
+.register {
+    text-align: center;
+    margin-top: 30px;
+    font-family: $app-font;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 30px;
+
+    p {
+        line-height: 1.4!important;
+        letter-spacing: -.1px!important;
+        margin-bottom: 0px;
+    }
+
+    a {
+        font-size: 13px;
+        color: $accent;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .background-section {
+        display: none;
+    }
+
+    .form-section {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        min-width: 0px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    form {
+        padding: 30px 24px 0px 24px;
+        text-align: center;
+    }
+
+    .form-field {
+        width: 80%;
+    }
+
+    button {
+        width: 80%;
+    }
+
+    .remember {
+        width: 80%;
+        margin: auto;
+        align-items: center;
+    }
+
+    .checkbox {
+        width: 100%;
+        float: left;
+    }
+}
