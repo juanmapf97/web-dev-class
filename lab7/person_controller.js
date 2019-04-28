@@ -4,20 +4,7 @@ module.exports.getPersons = function(req, res) {
     PersonModel.find({}, (error, resp) => {
         if (error) {
             res.json({ success: false, message: 'No persons here, maybe later :)', data: null });
-        } 
-
-        // persons = resp.map((person) => ({
-        //     name: person.name,
-        //     age: person.age,
-        //     born: person.born,
-        //     timeline: person.timeline,
-        //     alliegance: person.alliegance,
-        //     playedBy: person.playedBy,
-        //     titles: person.titles,
-        //     father: person.father,
-        //     mother: person.mother,
-        //     spouse: person.spouse
-        // }));
+        }
 
         res.json(
             {
