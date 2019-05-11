@@ -7,18 +7,13 @@ const config = require('../config')
 const secret = process.env.SECRET || config.secret
 
 const userSchema = new mongoose.Schema({
-  name: {
+  first_name: {
     type: String,
     required: true
   },
-  age: {
-    type: Number,
-    required: true,
-    validate(value) {
-      if ( value < 13 ) {
-        throw new Error('Debes ser mayor de 13 años')
-      }
-    }
+  last_name: {
+    type: String,
+    required: true
   },
   email: {
     type: String,
@@ -36,6 +31,10 @@ const userSchema = new mongoose.Schema({
     minlength: 8,
     trim: true
   },
+  is_admin: {
+    type: Boolean,
+    default: false
+  },
   tokens: [{
     token: {
       type: String,
@@ -52,8 +51,8 @@ const userSchema = new mongoose.Schema({
 })
 
 // una relacion entre dos Schemas, no lo guarda, es virtual 
-userSchema.virtual('todos', {
-  ref: 'Todo',
+userSchema.virtual('request', {
+  ref: 'Request',
   localField: '_id',
   foreignField: 'createdBy'
 })
@@ -79,10 +78,10 @@ userSchema.statics.findByCredentials = function(email, password) {
         if(match) {
           return resolve(user)
         } else {
-          return reject('Wrong password!')
+          return reject('Wrong username or password')
         }
       }).catch( function(error) {
-        return reject('Wrong password!')
+        return reject('Wrong username or password')
       })
     })
   })

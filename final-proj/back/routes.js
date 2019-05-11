@@ -2,24 +2,25 @@ const express = require('express')
 const router = express.Router()
 var cors = require('cors');
 
-// const users = require('./controllers/users.js')
-// const todos = require('./controllers/todos.js')
-// const auth = require('./middleware/auth')
+const users = require('./controllers/users.js')
+const request = require('./controllers/requests')
+const boxes = require('./controllers/boxes')
+const auth = require('./middleware/auth')
 
 router.all('*', cors());
 
-// router.get('/users', auth, users.getUser)
-// router.post('/users/login', users.login)
-// router.post('/users/logout', auth, users.logout)
-// router.post('/users', users.createUser)  // signup
-// router.patch('/users', auth, users.updateUser)
-// router.delete('/users', auth, users.deleteUser)
+router.get('/users', auth, users.getUser)
+router.post('/users/login', users.login)
+router.post('/users/logout', auth, users.logout)
+router.post('/users', users.createUser)  // signup
+router.patch('/users', auth, users.updateUser)
 
-// router.get('/todos/:id', auth, todos.getTodo)
-// router.get('/todos', auth, todos.getTodos)
-// router.post('/todos', auth, todos.createTodo)
-// router.patch('/todos/:id', auth, todos.updateTodo)
-// router.delete('/todos/:id', auth, todos.deleteTodo)
+router.get('/requests/:id', auth, request.getRequest)
+router.get('/requests', auth, request.getRequests)
+router.post('/requests', auth, request.createRequest)
+router.patch('/requests/:id', auth, request.updateRequest)
+
+router.get('/boxes/:id', auth, boxes.getRequestBoxes)
 
 router.get('*', function(req, res) {
   res.send({
