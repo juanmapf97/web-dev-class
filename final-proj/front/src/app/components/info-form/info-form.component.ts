@@ -311,7 +311,7 @@ export class InfoFormComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
   
-    return `${day}/${month}/${year}`;
+    return `${year}-${month}-${day}T${this.time.value}:00.000Z`;
   }
 
   /**
@@ -348,6 +348,7 @@ export class InfoFormComponent implements OnInit {
    */
   finishForm(){
     let req = this.createRequestObject();
+    // console.log(this.time.value);
     this.service.postRequest(req).subscribe((resp) => {
       console.log(resp);
       this.router.navigate(['app/requests']);
