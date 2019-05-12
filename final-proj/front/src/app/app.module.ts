@@ -9,7 +9,15 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule, MatListModule, MatNativeDateModule, MatStepperModule } from '@angular/material';
+import {
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatStepperModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatGridListModule
+} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { InfoFormComponent } from './components/info-form/info-form.component';
@@ -21,17 +29,23 @@ import {
   MatIconModule,
   MatInputModule,
   MatSnackBarModule,
-  MatTableModule } from '@angular/material';
+  MatTableModule
+} from '@angular/material';
+import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
+import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ClientListComponent } from './components/lists/client-list/client-list.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
     RegistrationFormComponent,
     InfoFormComponent,
+    RequestsListComponent,
     ClientListComponent,
-
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +66,9 @@ import { ClientListComponent } from './components/lists/client-list/client-list.
     MatListModule,
     MatNativeDateModule,
     MatStepperModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatGridListModule,
     MatTableModule,
     HttpClientModule
   ],

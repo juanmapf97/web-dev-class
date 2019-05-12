@@ -122,17 +122,11 @@ export class RegistrationFormComponent implements OnInit {
           last_name: this.lastName.value
         }).subscribe(
           (resp) => {
-            if (resp.success) {
-              this.router.navigate(['app']);
-            } else {
-              this.snackBar.open(resp.message, 'Ok', {
-                duration: 2000,
-                horizontalPosition: 'right'
-              });
-            }
+            localStorage.setItem('jwt', resp.token);
+            this.router.navigate(['app']);
           },
           (error) => {
-            this.snackBar.open(error.error.message, 'Ok', {
+            this.snackBar.open(error, 'Ok', {
               duration: 2000,
               horizontalPosition: 'right'
             });

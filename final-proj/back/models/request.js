@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Box = require('./box');
 
 const statuses = [ 'Pending pickup', 'Picked up', 'In Storage' ];
 // {
