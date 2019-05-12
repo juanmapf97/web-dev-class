@@ -42,6 +42,10 @@ export class AuthService {
   getUser() {
     return this.base.get('users');
   }
+
+  logout() {
+    return this.base.post('users/logout', {});
+  }
 }
 
 /**

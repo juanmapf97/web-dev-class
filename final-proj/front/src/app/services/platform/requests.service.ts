@@ -12,4 +12,8 @@ export class RequestsService {
   getRequests(): Observable<any> {
     return this.base.get('requests');
   }
+
+  getRequest(id): Observable<any> {
+    return this.base.get(`requests/${id}`);
+  }
 }

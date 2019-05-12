@@ -31,6 +31,7 @@ import {
 } from '@angular/material';
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
+import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ToolbarComponent } from './components/platform/toolbar/toolbar.componen
     RegistrationFormComponent,
     InfoFormComponent,
     RequestsListComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,

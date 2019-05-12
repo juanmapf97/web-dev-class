@@ -36,7 +36,7 @@ export class BaseService {
    */
   post(path: string, body: any): Observable<any> {
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('jwt');
     headers = headers.append('Authorization', `Bearer ${token}`);
     return this.httpClient.post(
       environment.apiEndpoint + path,
