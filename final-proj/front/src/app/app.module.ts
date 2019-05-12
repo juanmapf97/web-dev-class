@@ -22,6 +22,7 @@ import {
 import { HttpClientModule } from '@angular/common/http';
 
 import { InfoFormComponent } from './components/info-form/info-form.component';
+import { ReceiveFormComponent } from './components/receive-form/receive-form.component';
 import {
   MatBottomSheetModule,
   MatButtonModule,
@@ -46,7 +47,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     InfoFormComponent,
     RequestsListComponent,
     ToolbarComponent,
-    RequestDetailComponent
+    RequestDetailComponent,
+    ReceiveFormComponent
   ],
   imports: [
     BrowserModule,
