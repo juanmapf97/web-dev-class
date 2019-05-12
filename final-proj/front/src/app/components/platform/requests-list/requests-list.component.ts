@@ -61,6 +61,6 @@ export class RequestsListComponent implements OnInit {
   }
 
   onNewClick() {
-
+    this.router.navigate([`info-form`]);
   }
 }
