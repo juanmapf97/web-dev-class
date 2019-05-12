@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base-config/base.service';
 import { Observable } from 'rxjs';
+import { Box } from '../../components/info-form/info-form.component'
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class RequestsService {
     return this.base.get('requests');
   }
 
-  postRequest(time: string, boxes: any): Observable<any> {
+  postRequest(time: string, boxes: Box): Observable<any> {
     let body = {
-      "time": "12-11-2020",
+      "time": time,
       "latitude": 21.21231,
       "longitude": 122.2234,
       "boxes": boxes
