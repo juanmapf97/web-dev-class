@@ -12,4 +12,14 @@ export class RequestsService {
   getRequests(): Observable<any> {
     return this.base.get('requests');
   }
+
+  postRequest(time: string, boxes: any): Observable<any> {
+    let body = {
+      "time": "12-11-2020",
+      "latitude": 21.21231,
+      "longitude": 122.2234,
+      "boxes": boxes
+     }
+    return this.base.post('requests', body);
+  }
 }
