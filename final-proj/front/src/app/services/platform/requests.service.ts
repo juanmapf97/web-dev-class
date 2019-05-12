@@ -14,6 +14,10 @@ export class RequestsService {
     return this.base.get('requests');
   }
 
+  getRequest(id): Observable<any> {
+    return this.base.get(`requests/${id}`);
+  }
+
   postRequest(time: string, boxes: Box): Observable<any> {
     let body = {
       "time": time,

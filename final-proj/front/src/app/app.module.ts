@@ -34,7 +34,9 @@ import {
 } from '@angular/material';
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
+import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
 import { CdkTableModule } from '@angular/cdk/table';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { CdkTableModule } from '@angular/cdk/table';
     RegistrationFormComponent,
     InfoFormComponent,
     RequestsListComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    RequestDetailComponent
   ],
   imports: [
     BrowserModule,

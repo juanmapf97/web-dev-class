@@ -38,6 +38,14 @@ export class AuthService {
       password: userData.password
     });
   }
+
+  getUser() {
+    return this.base.get('users');
+  }
+
+  logout() {
+    return this.base.post('users/logout', {});
+  }
 }
 
 /**
