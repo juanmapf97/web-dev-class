@@ -16,7 +16,8 @@ import {
   MatStepperModule,
   MatToolbarModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -35,7 +36,6 @@ import { RequestsListComponent } from './components/platform/requests-list/reque
 import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ClientListComponent } from './components/lists/client-list/client-list.component';
-
 
 @NgModule({
   declarations: [
@@ -70,7 +70,8 @@ import { ClientListComponent } from './components/lists/client-list/client-list.
     MatCardModule,
     MatGridListModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

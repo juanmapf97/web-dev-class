@@ -111,15 +111,12 @@ button {
   margin: 30px auto;
   width: 80%;
   max-width: 1200px;
-  height: 480px;
+  // height: 480px;
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   background: #fff;
   padding: 24px;
-
-
-
 }
 
 .summary{
@@ -201,7 +198,16 @@ button {
   }
 
   &.comments{
-    width: 100%
+    width: 100%;
+  }
+  &.boxsize{
+    width: 11%;
+    padding-right: 1%;
+    margin-top: 8px;
+  }
+  &.desc{
+    width: 77%;
+    padding-right: 1%;
   }
 
 }
@@ -363,6 +369,7 @@ button {
     margin-top: 10px;
   }
 
+
 }
 
 .button_right{
@@ -484,7 +491,11 @@ button {
   }
 
   &.comments{
-    width: 100%
+    width: 100%;
+  }
+
+  &.boxsize{
+    width: 100%;
   }
 
 }
@@ -556,4 +567,32 @@ font-size: 13px;
     min-width: 50px;
     vertical-align: middle;
 }
+}
+
+.list{
+  margin: 18px auto;
+  width: 100%;
+  max-width: 1200px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  background: #fff;
+}
+
+.button_plus {
+  width: 20px;
+  background-color: $accent;
+  margin: 0;
+}
+
+.button_minus {
+  margin: 0;
+  width: 20px;
+  background-color: $accent;
+}
+
+.mat-paginator {
+  display: inline-block !important;
+  width: calc(100% - 70px) !important;
+  float: right !important;
 }

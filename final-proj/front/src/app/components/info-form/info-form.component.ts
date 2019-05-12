@@ -1,6 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material';
+import { ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material';
+import { RequestsService } from 'src/app/services/platform/requests.service';
+import { MatSnackBar } from '@angular/material';
+
+export interface Box {
+  position: number,
+  boxsize: number,
+  desc: string
+}
+
+let ELEMENT_DATA: Box[] = [];
 
 @Component({
   selector: 'app-info-form',
@@ -8,6 +21,8 @@ import { Subject } from 'rxjs';
   styleUrls: ['./info-form.component.scss']
 })
 export class InfoFormComponent implements OnInit {
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   /**
    * This will disable any option of choosing a past date in the DatePicker
@@ -61,6 +76,14 @@ export class InfoFormComponent implements OnInit {
       comments: new FormControl('')
     });
 
+    step4Form = new FormGroup({
+      boxsize: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$'), /* Only Allow Numbers To Be Entered In The Input */
+      ]),
+      desc: new FormControl('')
+    });
+
     /**
      * States available for the client to choose when filling the address form.
      */
@@ -98,11 +121,13 @@ export class InfoFormComponent implements OnInit {
       'Zacatecas'
   ];
 
-    constructor() {}
+    constructor(private service: RequestsService, private snackBar: MatSnackBar) {}
 
 
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+      this.dataSource.paginator = this.paginator;
+    }
 
 
     /**
@@ -138,7 +163,6 @@ export class InfoFormComponent implements OnInit {
      * @returns A string representing the error message
      */
     getfirstNameErrorMessage() {
-      console.log(this.firstName.value);
       return (this.firstName.hasError('required')) ? 'El nombre es requerido' :
               this.firstName.hasError('pattern') ? 'Solo utilizar letras' : 'Nombre invalido';
     }
@@ -186,6 +210,16 @@ export class InfoFormComponent implements OnInit {
             this.postalCode.hasError('pattern') ? 'Solo utilizar numeros' : 'Código Postal Invalido';
     }
 
+    /**
+     * Gets the correct error message for the telephone FormControl, depending on the
+     * invalid Validator.
+     * @returns A string representing the error message
+     */
+    getboxsizeErrorMessage() {
+      return (this.telephone.hasError('required')) ? 'El tamaño es requerido' :
+              this.telephone.hasError('pattern') ? 'Solo utilizar numeros' : 'Tamaño Invalido';
+    }
+
 
     /** This function enables the user to click anywhere in the input field to access the calendar on the horizontal form */
     onClick1(event: any) {
@@ -198,6 +232,94 @@ export class InfoFormComponent implements OnInit {
       element.click();
     }
 
+  displayedColumns: string[] = ['select', 'position', 'boxsize', 'desc'];
+  dataSource = new MatTableDataSource<Box>(ELEMENT_DATA);
+  selection = new SelectionModel<Box>(true, []);
+  totalBoxes = 0;
 
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
 
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: Box): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'select' : 'deselect'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
+  }
+
+  selected(){
+    return this.selection.selected.length > 0 ? true : false;
+  }
+
+  addBox(){
+    let boxsize = this.step4Form.get('boxsize').value;
+    let desc = this.step4Form.get('desc').value;
+    this.totalBoxes++;
+    const data = this.dataSource.data;
+        data.push({
+          position: this.totalBoxes,
+          boxsize: Number(boxsize),
+          desc: desc
+        });
+    this.dataSource.data = data;
+    this.step4Form.get('boxsize').setValue(0);
+    this.step4Form.get('desc').setValue('');
+  }
+
+  data = Object.assign( ELEMENT_DATA);
+  removeSelectedRows() {
+    this.selection.selected.forEach(item => {
+       let index: number = this.data.findIndex(d => d === item);
+       console.log(this.data.findIndex(d => d === item));
+       this.data.splice(index,1)
+       this.dataSource = new MatTableDataSource<Box>(this.data);
+       setTimeout(() => {
+        this.dataSource.paginator = this.paginator;
+      });
+     });
+     this.selection = new SelectionModel<Box>(true, []);
+  }
+
+  formattedDate() {
+    let d = this.date.value;
+    let month = String(d.getMonth() + 1);
+    let day = String(d.getDate());
+    const year = String(d.getFullYear());
+  
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+  
+    return `${day}-${month}-${year}`;
+  }
+
+  finishForm(){
+    let boxes = []
+    let date = this.formattedDate();
+    
+    this.data.forEach(row => {
+      boxes.push({ size: row.boxsize }) // TODO: Add description 
+     });
+
+    // this.service.postRequest().subscribe((resp) => {
+      
+    // },
+    // (error) => {
+    //   this.snackBar.open(error.error.message, 'Ok', {
+    //     duration: 2000,
+    //     horizontalPosition: 'right'
+    //   });
+    // });
+  }
 }
