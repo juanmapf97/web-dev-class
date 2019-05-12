@@ -6,6 +6,8 @@ import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { RequestsService } from 'src/app/services/platform/requests.service';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+import { Request } from '../../services/platform/requests.service'
 
 export interface Box {
   position: number,
@@ -121,7 +123,8 @@ export class InfoFormComponent implements OnInit {
       'Zacatecas'
   ];
 
-    constructor(private service: RequestsService, private snackBar: MatSnackBar) {}
+    constructor(private service: RequestsService, private snackBar: MatSnackBar,
+      private router: Router) {}
 
 
 
@@ -263,6 +266,9 @@ export class InfoFormComponent implements OnInit {
     return this.selection.selected.length > 0 ? true : false;
   }
 
+  /**
+   * Function to add a box to the list/table
+   */
   addBox(){
     let boxsize = this.step4Form.get('boxsize').value;
     let desc = this.step4Form.get('desc').value;
@@ -292,34 +298,47 @@ export class InfoFormComponent implements OnInit {
      this.selection = new SelectionModel<Box>(true, []);
   }
 
-  formattedDate() {
-    let d = this.date.value;
-    let month = String(d.getMonth() + 1);
-    let day = String(d.getDate());
-    const year = String(d.getFullYear());
-  
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-  
-    return `${day}-${month}-${year}`;
+  /**
+   * Function to create the Request Object
+   * that is going to be used on POST
+   */
+  createRequestObject(){
+    let boxes = []
+    this.data.forEach(row => {
+      boxes.push({ size: row.boxsize, description: row.desc })
+     });
+     
+     let req: Request =  {
+      giver_first_name: this.firstName.value,
+      giver_last_name: this.lastName.value,
+      giver_phone: this.telephone.value,
+      pickup_time: this.date.value,
+      boxes: boxes,
+      street: this.address.value,
+      street_info: this.hint.value,
+      colony: this.city.value,
+      state: this.state.value,
+      postal_code: this.postalCode.value,
+      comments: this.comments.value,
+      latitude: 21.21231,
+      longitude: 122.2234
+     }
+     return req;
   }
 
+  /**
+   * Function to submit the request to the service.
+   */
   finishForm(){
-    let boxes = []
-    let date = this.formattedDate();
-    
-    this.data.forEach(row => {
-      boxes.push({ size: row.boxsize }) // TODO: Add description 
-     });
-
-    // this.service.postRequest().subscribe((resp) => {
-      
-    // },
-    // (error) => {
-    //   this.snackBar.open(error.error.message, 'Ok', {
-    //     duration: 2000,
-    //     horizontalPosition: 'right'
-    //   });
-    // });
+    let req = this.createRequestObject();
+    this.service.postRequest(req).subscribe((resp) => {
+      this.router.navigate['app/requests'];
+    },
+    (error) => {
+      this.snackBar.open(error.error.message, 'Ok', {
+        duration: 2000,
+        horizontalPosition: 'right'
+      });
+    });
   }
 }

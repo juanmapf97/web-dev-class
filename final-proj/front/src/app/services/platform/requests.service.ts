@@ -1,7 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BaseService } from '../base-config/base.service';
 import { Observable } from 'rxjs';
-import { Box } from '../../components/info-form/info-form.component'
+
+export interface Box {
+  size: number,
+  description: string
+}
+
+export interface Request {
+  giver_first_name: string,
+  giver_last_name: string,
+  giver_phone: string,
+  pickup_time: string,
+  boxes: Box[],
+  street: string,
+  street_info: string,
+  colony: string,
+  state: string,
+  postal_code: string,
+  comments: string,
+  latitude: number,
+  longitude: number
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,13 +38,7 @@ export class RequestsService {
     return this.base.get(`requests/${id}`);
   }
 
-  postRequest(time: string, boxes: Box): Observable<any> {
-    let body = {
-      "time": time,
-      "latitude": 21.21231,
-      "longitude": 122.2234,
-      "boxes": boxes
-     }
+  postRequest(body: Request): Observable<any> {
     return this.base.post('requests', body);
   }
 }
