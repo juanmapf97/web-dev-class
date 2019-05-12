@@ -311,7 +311,7 @@ export class InfoFormComponent implements OnInit {
     if (month.length < 2) month = '0' + month;
     if (day.length < 2) day = '0' + day;
   
-    return `${year}-${month}-${day}T${this.time.value}:00.000Z`;
+    return `${year}-${month}-${day}T${this.time.value}:00.000-06:00`;
   }
 
   /**
@@ -329,7 +329,7 @@ export class InfoFormComponent implements OnInit {
       giver_first_name: this.firstName.value,
       giver_last_name: this.lastName.value,
       giver_phone: this.telephone.value,
-      pickup_time: this.date.value,
+      pickup_time: date,
       boxes: boxes,
       street: this.address.value,
       street_info: this.hint.value,
@@ -348,9 +348,8 @@ export class InfoFormComponent implements OnInit {
    */
   finishForm(){
     let req = this.createRequestObject();
-    // console.log(this.time.value);
+
     this.service.postRequest(req).subscribe((resp) => {
-      console.log(resp);
       this.router.navigate(['app/requests']);
     },
     (error) => {
