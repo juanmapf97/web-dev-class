@@ -72,24 +72,8 @@ export class LoginFormComponent implements OnInit {
     if (this.loginForm.valid) {
       this.service.login(this.email.value, this.password.value).subscribe(
         (resp) => {
-          if (resp.success) {
-            const date = new Date();
-            if (this.remember.value) {
-              this.base.currentStorage = localStorage;
-            } else {
-              this.base.currentStorage = sessionStorage;
-            }
-            this.base.currentStorage.setItem('access_token', resp.data.access_token);
-            this.base.currentStorage.setItem('expires_in', new Date(date.getTime() + resp.data.expires_in / 60 * 60000).toString());
-            this.base.currentStorage.setItem('refresh_token', resp.data.refresh_token);
-            this.base.currentStorage.setItem('scope', resp.data.scope);
-            this.router.navigate(['app']);
-          } else {
-            this.snackBar.open(resp.message, 'Ok', {
-              duration: 2000,
-              horizontalPosition: 'right'
-            });
-          }
+          localStorage.setItem('jwt', resp.token);
+          this.router.navigate(['app']);
         },
         (error) => {
           this.snackBar.open(error.error.message, 'Ok', {

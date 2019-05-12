@@ -3,13 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { InfoFormComponent } from './components/info-form/info-form.component';
+import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 
 
 const routes: Routes = [
   {
     path: 'app',
-    // component: LoginFormComponent
-    redirectTo: 'auth/registration'
+    component: RequestsListComponent
+    // redirectTo: 'auth/registration'
   },
   {
     path: 'auth/login',
