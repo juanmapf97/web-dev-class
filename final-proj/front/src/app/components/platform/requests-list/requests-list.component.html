@@ -2,6 +2,10 @@
 <div class="content-section">
   <div class="info-section">
     <mat-card class="card">
+      <mat-card-title class="title">Número de pedidos</mat-card-title>
+      <mat-card-content class="content">{{dataSource.length}}</mat-card-content>
+    </mat-card>
+    <mat-card class="card">
       <mat-card-title class="title">Número de cajas</mat-card-title>
       <mat-card-content class="content">{{totalBoxes}}</mat-card-content>
     </mat-card>
@@ -9,11 +13,8 @@
       <mat-card-title class="title">Cobro mensual</mat-card-title>
       <mat-card-content class="content">{{totalCost | currency}}</mat-card-content>
     </mat-card>
-    <mat-card class="card">
-      <mat-card-title class="title">Cantidad Mensual</mat-card-title>
-      <mat-card-content class="content">$450.00</mat-card-content>
-    </mat-card>
   </div>
+  <button mat-raised-button class="button" (click)="onNewClick()">Nuevo pedido</button>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.

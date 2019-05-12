@@ -54,4 +54,11 @@ export class RequestsListComponent implements OnInit {
     });
   }
 
+  onDetailClick(request) {
+
+  }
+
+  onNewClick() {
+
+  }
 }

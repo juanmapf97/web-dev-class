@@ -36,3 +36,10 @@ table {
 .icon {
     cursor: pointer;
 }
+
+.button {
+    float: right;
+    margin-bottom: 40px;
+    background-color: $accent;
+    color: $primary;
+}
