@@ -4,7 +4,6 @@ import { LoginFormComponent } from './components/auth/login-form/login-form.comp
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { InfoFormComponent } from './components/info-form/info-form.component';
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
-import { ClientListComponent } from './components/lists/client-list/client-list.component';
 
 
 const routes: Routes = [
