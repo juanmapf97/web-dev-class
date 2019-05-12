@@ -14,6 +14,10 @@ const routes: Routes = [
     redirectTo: 'auth/registration'
   },
   {
+    path: 'app/requests',
+    component: RequestsListComponent
+  },
+  {
     path: 'app/detail/:id',
     component: RequestDetailComponent
   },

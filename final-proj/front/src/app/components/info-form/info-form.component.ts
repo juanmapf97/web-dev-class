@@ -299,11 +299,28 @@ export class InfoFormComponent implements OnInit {
   }
 
   /**
+   * Function to format the date to the 
+   * desired format
+   */
+  formattedDate() {
+    let d = this.date.value;
+    let month = String(d.getMonth() + 1);
+    let day = String(d.getDate());
+    const year = String(d.getFullYear());
+  
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+  
+    return `${day}/${month}/${year}`;
+  }
+
+  /**
    * Function to create the Request Object
    * that is going to be used on POST
    */
   createRequestObject(){
     let boxes = []
+    let date = this.formattedDate();
     this.data.forEach(row => {
       boxes.push({ size: row.boxsize, description: row.desc })
      });
@@ -332,7 +349,8 @@ export class InfoFormComponent implements OnInit {
   finishForm(){
     let req = this.createRequestObject();
     this.service.postRequest(req).subscribe((resp) => {
-      this.router.navigate['app/requests'];
+      console.log(resp);
+      this.router.navigate(['app/requests']);
     },
     (error) => {
       this.snackBar.open(error.error.message, 'Ok', {
