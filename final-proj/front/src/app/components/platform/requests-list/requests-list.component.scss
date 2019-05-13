@@ -24,6 +24,13 @@
     font-size: 24px;
 }
 
+.button {
+    float: right;
+    margin-bottom: 40px;
+    background-color: $accent;
+    color: $primary;
+}
+
 .content {
     font-size: 38px;
 }
@@ -35,11 +42,4 @@ table {
 
 .icon {
     cursor: pointer;
-}
-
-.button {
-    float: right;
-    margin-bottom: 40px;
-    background-color: $accent;
-    color: $primary;
 }
