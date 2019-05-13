@@ -12,15 +12,19 @@ import { MatSelectModule } from '@angular/material/select';
 import {
   MatDatepickerModule,
   MatNativeDateModule,
+  MatListModule,
   MatStepperModule,
   MatToolbarModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatPaginatorModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { InfoFormComponent } from './components/info-form/info-form.component';
+import { ReceiveFormComponent } from './components/receive-form/receive-form.component';
 import {
+  MatBottomSheetModule,
   MatButtonModule,
   MatCheckboxModule,
   MatFormFieldModule,
@@ -32,6 +36,7 @@ import {
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
 import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 @NgModule({
@@ -42,7 +47,8 @@ import { RequestDetailComponent } from './components/platform/request-detail/req
     InfoFormComponent,
     RequestsListComponent,
     ToolbarComponent,
-    RequestDetailComponent
+    RequestDetailComponent,
+    ReceiveFormComponent
   ],
   imports: [
     BrowserModule,
@@ -53,18 +59,22 @@ import { RequestDetailComponent } from './components/platform/request-detail/req
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    CdkTableModule,
+    MatBottomSheetModule,
     MatCheckboxModule,
     MatSnackBarModule,
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatListModule,
     MatNativeDateModule,
     MatStepperModule,
     MatToolbarModule,
     MatCardModule,
     MatGridListModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { InfoFormComponent } from './components/info-form/info-form.component';
+import { ReceiveFormComponent } from './components/receive-form/receive-form.component';
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
 
@@ -10,8 +11,11 @@ import { RequestDetailComponent } from './components/platform/request-detail/req
 const routes: Routes = [
   {
     path: 'app',
+    redirectTo: 'app/requests'
+  },
+  {
+    path: 'app/requests',
     component: RequestsListComponent
-    // redirectTo: 'auth/registration'
   },
   {
     path: 'app/detail/:id',
@@ -28,6 +32,10 @@ const routes: Routes = [
   {
     path: 'info-form',
     component: InfoFormComponent
+  },
+  {
+    path: 'receive-form',
+    component: ReceiveFormComponent
   },
 ];
 
