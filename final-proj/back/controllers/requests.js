@@ -63,7 +63,7 @@ const getRequests = function(req, res) {
 
 const getRequest = function(req, res) {
     const _id = req.params.id;
-    Request.findOne({ _id, createdBy: req.user._id }).then((request) => {
+    Request.findOne({ _id, createdBy: req.user._id }).populate('boxes').then((request) => {
         return res.send(request);
     }).catch((error) => {
         return res.status(400).send(error);

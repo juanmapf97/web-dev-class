@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class RequestDetailComponent implements OnInit {
   request: any;
+  totalPrice = 0;
 
   constructor(private route: ActivatedRoute, private service: RequestsService, private snackBar: MatSnackBar) { }
 
@@ -17,6 +18,9 @@ export class RequestDetailComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.service.getRequest(params.id).subscribe((resp) => {
         this.request = resp;
+        this.totalPrice = resp.boxes.reduce((total, elem) => {
+          return total + elem.price;
+        }, 0);
       },
       (error) => {
         this.snackBar.open(error.error.error, 'Ok', {
@@ -25,6 +29,10 @@ export class RequestDetailComponent implements OnInit {
         });
       });
     });
+  }
+
+  onScheduleClick() {
+    
   }
 
 }

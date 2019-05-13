@@ -39,7 +39,7 @@ export class RequestsListComponent implements OnInit {
             id: element._id,
             boxes: element.boxes.length,
             status: statuses[element.status],
-            time: new Date(element.time),
+            time: new Date(element.pickup_time),
             cost
           });
           this.totalBoxes += element.boxes.length;
