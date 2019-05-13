@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   name: string;
   visible = false;
-  isAdmin = localStorage.getItem('is_admin');
-
+  isAdmin = (localStorage.getItem('is_admin') === 'true');
+  
   constructor(private service: AuthService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {

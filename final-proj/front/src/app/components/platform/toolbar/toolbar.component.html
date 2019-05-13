@@ -5,6 +5,7 @@
     {{name}}
     <div class="options" *ngIf="visible">
       <span class="option" (click)="onConfig()" *ngIf="!isAdmin">Configuración</span>
+      <span class="option" (click)="profile()">Editar Perfil</span>
       <span class="option" (click)="onLogout()">Cerrar sesión</span>
     </div>
   </span>
