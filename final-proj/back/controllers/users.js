@@ -3,7 +3,11 @@ const User = require('../models/user')
 const createUser = function(req, res){
     const user = new User(req.body)
     user.save().then(function() {
-        return res.send(user)
+        user.generateToken().then(function(token){
+            return res.send({user, token})
+        }).catch(function(error){
+            return res.status(401).send({ error: error })
+        })
     }).catch(function(error) {
         return res.status(400).send(error)
     })

@@ -47,7 +47,7 @@ export class AuthService {
     return this.base.post('users/logout', {});
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     return localStorage.getItem('jwt') != null;
   }
 }
