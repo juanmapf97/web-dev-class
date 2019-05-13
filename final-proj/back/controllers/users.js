@@ -6,10 +6,19 @@ const createUser = function(req, res){
         user.generateToken().then(function(token){
             return res.send({user, token})
         }).catch(function(error){
-            return res.status(401).send({ error: error })
+            // TODO check this
+            return res.status(401).send(
+                { 
+                    error: error,
+                    message: 'Se requiere autenticación para hacer esto.'
+                })
         })
     }).catch(function(error) {
-        return res.status(400).send(error)
+        return res.status(400).send(
+            { 
+                error: error,
+                message: 'Error al crear usuario. Intenta más tarde o revisa tus datos.'
+            })
     })
 }
 
@@ -18,10 +27,18 @@ const login = function(req, res) {
         user.generateToken().then(function(token){
             return res.send({user, token})
         }).catch(function(error){
-            return res.status(401).send({ error: error })
+            return res.status(401).send(
+                { 
+                    error: error,
+                    message: 'Se requiere autenticación para hacer esto.'
+                })
         })
     }).catch(function(error) {
-        return res.status(401).send({ error: error })
+        return res.status(401).send(
+            { 
+                error: error,
+                message: 'Revisa tus datos y vuelve a intentar.'
+            })
     })
 }
 
@@ -32,7 +49,11 @@ const logout = function(req, res) {
     req.user.save().then(function() {
         return res.send()
     }).catch(function(error) {
-        return res.status(500).send({ error: error } )
+        return res.status(500).send(
+            { 
+                error: error,
+                message: 'Ocurrió un error inesperado'
+            })
     })
 }
 
@@ -49,7 +70,8 @@ const updateUser = function(req, res) {
   
     if( !isValidUpdate ) {
       return res.status(400).send({
-        error: 'Invalid update, only allowed to update: ' + allowedUpdates
+        error: 'Invalid update, only allowed to update: ' + allowedUpdates,
+        message: 'Un campo que intentaste actualizar no está permitido'
       })
     }
     User.findByIdAndUpdate(_id, req.body ).then(function(user) {
@@ -58,7 +80,11 @@ const updateUser = function(req, res) {
       }
       return res.send(user)
     }).catch(function(error) {
-      res.status(500).send(error)
+        return res.status(500).send(
+            { 
+                error: error,
+                message: 'Ocurrió un error inesperado'
+            })
     })
 }
 

@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   name: string;
   visible = false;
-  isAdmin = localStorage.getItem('is_admin');
-
+  isAdmin = (localStorage.getItem('is_admin') === 'true');
+  
   constructor(private service: AuthService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
@@ -49,8 +49,12 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  onConfig() {
+  onRequests() {
+    this.router.navigate(['app/requests']);
+  }
 
+  onConfig() {
+    this.router.navigate(['profile']);
   }
 
 }

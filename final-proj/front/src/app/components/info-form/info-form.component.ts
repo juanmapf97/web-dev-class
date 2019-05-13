@@ -8,6 +8,7 @@ import { RequestsService } from 'src/app/services/platform/requests.service';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Request } from '../../services/platform/requests.service'
+import { MatStepper } from '@angular/material/stepper';
 
 export interface Box {
   position: number,
@@ -80,7 +81,6 @@ export class InfoFormComponent implements OnInit {
 
     step4Form = new FormGroup({
       boxsize: new FormControl('', [
-        Validators.required,
         Validators.pattern('^[+]?([0-9]+(?:[\.][0-9]*)?|\.[0-9]+)$'), /* Only Allow Numbers To Be Entered In The Input */
       ]),
       desc: new FormControl('')
@@ -280,7 +280,7 @@ export class InfoFormComponent implements OnInit {
           desc: desc
         });
     this.dataSource.data = data;
-    this.step4Form.get('boxsize').setValue(0);
+    this.step4Form.get('boxsize').setValue(null);
     this.step4Form.get('desc').setValue('');
   }
 
@@ -359,4 +359,19 @@ export class InfoFormComponent implements OnInit {
       });
     });
   }
+
+  showError = false;
+
+  goForward(stepper: MatStepper){
+    console.log(this.dataSource.data.length);
+    if(this.dataSource.data.length > 0){
+      this.showError = false;
+      stepper.next();
+    }
+    else{
+      this.showError = true;
+    }
+  }
+
+
 }

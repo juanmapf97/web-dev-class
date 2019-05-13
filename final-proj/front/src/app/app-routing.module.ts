@@ -7,6 +7,7 @@ import { InfoFormComponent } from './components/info-form/info-form.component';
 import { ReceiveFormComponent } from './components/receive-form/receive-form.component';
 import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
 import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
+import { ProfileComponent } from './components/platform/profile/profile.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'app/requests',
     component: RequestsListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [AuthGuard]
   },
   {
@@ -41,6 +47,10 @@ const routes: Routes = [
     path: 'receive-form/:id',
     component: ReceiveFormComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: '*',
+    redirectTo: 'app/requests'
   },
 ];
 
