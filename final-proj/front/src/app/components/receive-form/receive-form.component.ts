@@ -54,6 +54,13 @@ export class ReceiveFormComponent implements OnInit {
     get time() { return this.step3Form.get('time'); }
     get comments() { return this.step3Form.get('comments'); }
 
+    /**
+     * Declare getters for every FormControl inside FormGroup in step 4. This
+     * enhances code readability.
+     */
+    get boxsize() { return this.step4Form.get('boxsize'); }
+    get desc() { return this.step4Form.get('desc'); }
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   /**
@@ -235,12 +242,12 @@ export class ReceiveFormComponent implements OnInit {
 
 
   /** This function enables the user to click anywhere in the input field to access the calendar on the horizontal form */
-  onClick1(event: any) {
+  onClick1() {
     const element: any = document.getElementById('horizontal').childNodes[0];
     element.click();
   }
   /** This function enables the user to click anywhere in th input field to access the calendar on the vertical form */
-  onClick2(event: any) {
+  onClick2() {
     const element: any = document.getElementById('vertical').childNodes[0];
     element.click();
   }
