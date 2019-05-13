@@ -1,11 +1,69 @@
+<app-toolbar></app-toolbar>
+<div class="header">
+  <h1 class="title">Resumen del pedido</h1>
+  <button mat-raised-button class="button" (click)="onScheduleClick()">Agendar envío</button>
+</div>
 <div class="main-section">
   <div class="boxes-list">
-
+    <mat-card class="box-card" *ngFor="let box of request?.boxes; let i = index;">
+      <mat-card-content class="box-content">
+        <p>{{ 'Caja ' + (i + 1) }}</p>
+        <p class="description">{{box.description}}</p>
+        <p>{{box.size}} m<sup>3</sup></p>
+      </mat-card-content>
+    </mat-card>
   </div>
   <div class="payment-section">
     <mat-card class="payment-summary">
-
+      <mat-card-title>Información general</mat-card-title>
+      <mat-card-content class="payment-content">
+        <table>
+          <tr>
+            <td class="bold">Nombre</td>
+            <td class="end-text">{{ request?.giver_first_name + ' ' + request?.giver_last_name }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Dirección</td>
+            <td class="end-text">{{ request?.street + ', ' + request?.street_info + ', ' + request?.colony + ', ' + request?.state }}</td>
+          </tr>
+          <tr *ngIf="request?.receive_street">
+            <td class="bold">Dirección envío</td>
+            <td class="end-text">{{ request?.receive_street + ', ' + request?.receive_street_info + ', ' + request?.receive_colony + ', ' + request?.receive_state }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Teléfono</td>
+            <td class="end-text">{{ request?.giver_phone }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Fecha y hora</td>
+            <td class="end-text">{{ request?.pickup_time | date: 'dd/MM/yyyy HH:mm' }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Comentarios</td>
+            <td class="end-text">{{ request?.comments }}</td>
+          </tr>
+          <tr *ngIf="request?.receive_comments">
+            <td class="bold">Comentarios envío</td>
+            <td class="end-text">{{ request?.receive_comments }}</td>
+          </tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="payment-summary">
+      <mat-card-title>Costo mensual</mat-card-title>
+      <mat-card-content class="payment-content">
+        <table>
+          <tr *ngFor="let box of request?.boxes; let i = index;">
+            <td>{{'Caja ' + (i + 1) }}</td>
+            <td>{{box.price | currency}}</td>
+          </tr>
+          <div class="line"></div>
+          <tr class="row">
+            <td class="bold">Total</td>
+            <td>{{ totalPrice | currency}}</td>
+          </tr>
+        </table>
+      </mat-card-content>
     </mat-card>
   </div>
-  
 </div>

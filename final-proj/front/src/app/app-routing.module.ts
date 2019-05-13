@@ -12,8 +12,7 @@ import { RequestDetailComponent } from './components/platform/request-detail/req
 const routes: Routes = [
   {
     path: 'app',
-    // component: LoginFormComponent
-    redirectTo: 'auth/registration'
+    redirectTo: 'app/requests'
   },
   {
     path: 'app/requests',
@@ -39,7 +38,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'receive-form',
+    path: 'receive-form/:id',
     component: ReceiveFormComponent,
     canActivate: [AuthGuard]
   },
