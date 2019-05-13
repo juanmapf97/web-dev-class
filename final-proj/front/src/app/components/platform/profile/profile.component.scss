@@ -1,0 +1,101 @@
+@import '../../../../styles.scss';
+
+.main-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: $app-font;
+    font-weight: 500;
+    color: $primary;
+    margin: 35px;
+}
+
+.button {
+    float: right;
+    margin: auto 35px;
+    background-color: $accent;
+    color: $primary;
+}
+
+.box-card {
+    margin-bottom: 16px;
+}
+
+.box-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .description {
+        max-width: 350px;
+    }
+}
+
+.box-content>:first-child {
+    margin-top: auto;
+}
+
+.profile-section {
+    width: 90%;
+    padding: 0px 35px 35px 35px;
+    max-width: 1200px;
+}
+
+.profile-summary {
+    margin: auto;
+    margin-bottom: 32px;
+}
+
+// .payment-content {
+//     margin-top: 26px;
+// }
+
+table {
+    width: 100%;
+    padding-left: 24px;
+
+    th {
+        text-align: start;
+    }
+
+    td {
+        padding-top: 18px;
+    }
+
+    .bold {
+        font-weight: 700;
+    }
+}
+
+.line {
+    margin-top: 16px;
+    height: 1px;
+    background-color: $primary;
+    width: 175%;
+}
+
+.end-text {
+    text-align: end;
+}
+
+.form-field {
+    width: 100%;
+    &.divide {
+        width: 45%;
+    }
+}
+
+.btn-act{
+    width: 95%;
+}
+// border: 1px solid #dddddd80;

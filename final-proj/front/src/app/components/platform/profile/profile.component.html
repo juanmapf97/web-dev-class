@@ -1,0 +1,66 @@
+<app-toolbar></app-toolbar>
+<div class="header">
+  <h1 class="title">Mi Perfil</h1>
+  <button mat-raised-button class="button" (click)="onClick()">{{editText}}</button>
+</div>
+<div class="main-section">
+  <div class="profile-section">
+    <mat-card class="profile-summary">
+      <mat-card-title>Información general</mat-card-title>
+      <mat-card-content class="profile-content">
+        <table *ngIf="!updateProfile">
+          <tr>
+            <td class="bold">Nombre</td>
+            <td class="end-text">{{ user?.first_name}}</td>
+          </tr>
+          <tr>
+            <td class="bold">Apellido</td>
+            <td class="end-text">{{ user?.last_name }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Email</td>
+            <td class="end-text">{{ user?.email }}</td>
+          </tr>
+          <tr>
+            <td class="bold">Contraseña</td>
+            <td class="end-text">{{ user?.password }}</td>
+          </tr>
+        </table>
+
+        <form [formGroup]="updateForm" *ngIf="updateProfile">
+            <mat-form-field appearance="outline" class="form-field divide">
+                <mat-label>Nombre</mat-label>
+                <input type="text" matInput formControlName="firstName">
+                <mat-icon class="material-icons-outlined icon" matSuffix>account_circle</mat-icon>
+                <mat-error *ngIf="firstName.invalid">{{getEmailErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="form-field divide">
+                  <mat-label>Apellido</mat-label>
+                  <input type="text" matInput formControlName="lastName">
+                  <mat-icon class="material-icons-outlined icon" matSuffix>account_circle</mat-icon>
+                  <mat-error *ngIf="lastName.invalid">{{getEmailErrorMessage()}}</mat-error>
+                </mat-form-field>
+            <mat-form-field appearance="outline" class="form-field">
+                <mat-label>Correo electrónico</mat-label>
+                <input type="email" matInput formControlName="email">
+                <mat-icon class="material-icons-outlined icon" matSuffix>email</mat-icon>
+                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="form-field divide">
+                <mat-label>Contraseña</mat-label>
+                <input type="password" matInput formControlName="password">
+                <mat-icon class="material-icons-outlined icon" matSuffix>vpn_key</mat-icon>
+                <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="form-field divide">
+                <mat-label>Confirmar contraseña</mat-label>
+                <input type="password" matInput formControlName="confirmPassword">
+                <mat-icon class="material-icons-outlined icon" matSuffix>vpn_key</mat-icon>
+                <mat-error *ngIf="confirmPassword.invalid">{{getConfirmPasswordErrorMessage()}}</mat-error>
+              </mat-form-field>
+              <button mat-raised-button class="button btn-act" (click)="onUpdateClick()">Actualizar datos</button>
+            </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
