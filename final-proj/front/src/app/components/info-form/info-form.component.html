@@ -232,7 +232,7 @@
                               <mat-label>Tamaño</mat-label>
                               <input matInput formControlName="boxsize" maxlength="16" [value]="boxsize?.value" required>
                               <mat-icon matSuffix class="secondary-text">photo_size_select_small</mat-icon>
-                              <mat-error *ngIf="boxsize?.invalid">{{getsizeErrorMessage()}}</mat-error>
+                              <mat-error *ngIf="boxsize?.invalid">{{getboxsizeErrorMessage()}}</mat-error>
                           </mat-form-field>
                           <mat-form-field appearance="outline" fxFlex="50" class="form-field desc">
                               <mat-label>Descripción</mat-label>
