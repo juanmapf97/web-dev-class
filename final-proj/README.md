@@ -19,3 +19,9 @@ ng serve
 ```
 
 De esta manera, se contará con la aplicación ejecutando en el ambiente de desarrollo. El servidor se encontrará en `http://localhost:3000` mientras que el frontend en `http://localhost:4200`.
+
+## Autores
+| Autor      |
+|-----------------
+|Juan Manuel Pérez |
+|Enrique García |
