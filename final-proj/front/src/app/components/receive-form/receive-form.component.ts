@@ -6,16 +6,16 @@ import { ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { RequestsService } from 'src/app/services/platform/requests.service';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Request } from '../../services/platform/requests.service';
+
+const ELEMENT_DATA: Box[] = [];
 
 export interface Box {
   position: number;
   boxsize: number;
   desc: string;
 }
-
-const ELEMENT_DATA: Box[] = [];
 
 @Component({
   selector: 'app-receive-form',
@@ -25,7 +25,7 @@ const ELEMENT_DATA: Box[] = [];
 export class ReceiveFormComponent implements OnInit {
 
   constructor(private service: RequestsService, private snackBar: MatSnackBar,
-              private router: Router) {}
+              private router: Router, private route: ActivatedRoute) {}
 
 
   /**
@@ -159,11 +159,14 @@ export class ReceiveFormComponent implements OnInit {
   totalBoxes = 0;
 
   data = Object.assign( ELEMENT_DATA);
-
+  requestId: string;
 
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.route.params.subscribe((params) => {
+      this.requestId = params.id;
+    });
   }
 
 
@@ -319,26 +322,20 @@ export class ReceiveFormComponent implements OnInit {
    * that is going to be used on POST
    */
   createRequestObject() {
-    const boxes = [];
-    const date = this.formattedDate();
-    this.data.forEach(row => {
-      boxes.push({ size: row.boxsize, description: row.desc });
-     });
+    // const boxes = [];
+    // const date = this.formattedDate();
+    // this.data.forEach(row => {
+    //   boxes.push({ size: row.boxsize, description: row.desc });
+    //  });
 
-    const req: Request =  {
-      giver_first_name: this.firstName.value,
-      giver_last_name: this.lastName.value,
-      giver_phone: this.telephone.value,
-      pickup_time: this.date.value,
-      boxes,
-      street: this.address.value,
-      street_info: this.hint.value,
-      colony: this.city.value,
-      state: this.state.value,
-      postal_code: this.postalCode.value,
-      comments: this.comments.value,
-      latitude: 21.21231,
-      longitude: 122.2234
+    const req =  {
+      receive_time: this.date.value,
+      receive_street: this.address.value,
+      receive_street_info: this.hint.value,
+      receive_colony: this.city.value,
+      receive_state: this.state.value,
+      receive_postal_code: this.postalCode.value,
+      receive_comments: this.comments.value
      };
     return req;
   }
@@ -348,12 +345,12 @@ export class ReceiveFormComponent implements OnInit {
    */
   finishForm() {
     const req = this.createRequestObject();
-    this.service.postRequest(req).subscribe((resp) => {
+    this.service.updateRequest(this.requestId, req).subscribe((resp) => {
       console.log(resp);
-      this.router.navigate(['app/requests']);
+      this.router.navigate([`app/detail/${this.requestId}`]);
     },
     (error) => {
-      this.snackBar.open(error.error.message, 'Ok', {
+      this.snackBar.open(error.error.error, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });

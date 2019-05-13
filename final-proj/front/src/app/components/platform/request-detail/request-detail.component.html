@@ -26,6 +26,10 @@
             <td class="bold">Dirección</td>
             <td class="end-text">{{ request?.street + ', ' + request?.street_info + ', ' + request?.colony + ', ' + request?.state }}</td>
           </tr>
+          <tr *ngIf="request?.receive_street">
+            <td class="bold">Dirección envío</td>
+            <td class="end-text">{{ request?.receive_street + ', ' + request?.receive_street_info + ', ' + request?.receive_colony + ', ' + request?.receive_state }}</td>
+          </tr>
           <tr>
             <td class="bold">Teléfono</td>
             <td class="end-text">{{ request?.giver_phone }}</td>
@@ -35,9 +39,13 @@
             <td class="end-text">{{ request?.pickup_time | date: 'dd/MM/yyyy HH:mm' }}</td>
           </tr>
           <tr>
-              <td class="bold">Comentarios</td>
-              <td class="end-text">{{ request?.comments }}</td>
-            </tr>
+            <td class="bold">Comentarios</td>
+            <td class="end-text">{{ request?.comments }}</td>
+          </tr>
+          <tr *ngIf="request?.receive_comments">
+            <td class="bold">Comentarios envío</td>
+            <td class="end-text">{{ request?.receive_comments }}</td>
+          </tr>
         </table>
       </mat-card-content>
     </mat-card>

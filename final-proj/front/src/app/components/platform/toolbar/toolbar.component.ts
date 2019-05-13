@@ -30,6 +30,10 @@ export class ToolbarComponent implements OnInit {
     this.visible = !this.visible;
   }
 
+  onTitle() {
+    this.router.navigate(['app']);
+  }
+
   onLogout() {
     this.service.logout().subscribe((resp) => {
       localStorage.removeItem('jwt');

@@ -41,4 +41,8 @@ export class RequestsService {
   postRequest(body: Request): Observable<any> {
     return this.base.post('requests', body);
   }
+
+  updateRequest(id, body): Observable<any> {
+    return this.base.patch(`requests/${id}`, body);
+  }
 }

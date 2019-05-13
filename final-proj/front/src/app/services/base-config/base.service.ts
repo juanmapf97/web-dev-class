@@ -52,9 +52,22 @@ export class BaseService {
    */
   put(path: string, body: any): Observable<any> {
     let headers = new HttpHeaders();
-    const token = localStorage.getItem('access_token');
+    const token = localStorage.getItem('jwt');
     headers = headers.append('Authorization', `Bearer ${token}`);
     return this.httpClient.put(environment.apiEndpoint + path, body, { headers });
+  }
+
+  /**
+   * Base put call
+   * @param path - Path to call
+   * @param body - Object to be sent as the put body
+   * @returns An Observable of the response from the server
+   */
+  patch(path: string, body: any): Observable<any> {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('jwt');
+    headers = headers.append('Authorization', `Bearer ${token}`);
+    return this.httpClient.patch(environment.apiEndpoint + path, body, { headers });
   }
 
   /**

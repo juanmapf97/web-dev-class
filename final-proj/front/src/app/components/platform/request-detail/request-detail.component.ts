@@ -32,7 +32,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   onScheduleClick() {
-    this.router.navigate(['receive-form']);
+    this.router.navigate([`receive-form/${this.request._id}`]);
   }
 
 }

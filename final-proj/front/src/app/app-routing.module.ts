@@ -34,7 +34,7 @@ const routes: Routes = [
     component: InfoFormComponent
   },
   {
-    path: 'receive-form',
+    path: 'receive-form/:id',
     component: ReceiveFormComponent
   },
 ];

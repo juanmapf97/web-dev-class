@@ -92,7 +92,25 @@ const updateRequest = function(req, res) {
             res.status(500).send(error)
         })
     } else {
-        return res.status(401).send({error: 'Must be admin to update request'});
+        const _id = req.params.id
+        const updates = Object.keys(req.body)
+        const allowedUpdates = ['receive_time', 'receive_street', 'receive_street_info', 'receive_colony', 'receive_state', 'receive_comments', 'receive_postal_code']
+        
+        const isValidUpdate = updates.every((update) => allowedUpdates.includes(update))
+    
+        if( !isValidUpdate ) {
+            return res.status(400).send({
+                error: 'Invalid update, only allowed to update: ' + allowedUpdates
+            })
+        }
+        Request.findByIdAndUpdate(_id, req.body ).then((request) => {
+            if (!request) {
+                return res.status(404).send()
+            }
+            return res.send(request)
+        }).catch(function(error) {
+            res.status(500).send(error)
+        })
     }
 }
 

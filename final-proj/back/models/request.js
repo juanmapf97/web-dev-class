@@ -34,6 +34,24 @@ const requestSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    receive_street: {
+        type: String
+    },
+    receive_street_info: {
+        type: String
+    },
+    receive_colony: {
+        type: String
+    },
+    receive_state: {
+        type: String
+    },
+    receive_postal_code: {
+        type: String
+    },
+    receive_comments: {
+        type: String
+    },
     receive_time: {
         type: Date
     },
