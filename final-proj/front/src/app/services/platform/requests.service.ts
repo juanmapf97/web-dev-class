@@ -45,4 +45,8 @@ export class RequestsService {
   updateRequest(id, body): Observable<any> {
     return this.base.patch(`requests/${id}`, body);
   }
+
+  deleteRequest(id) {
+    return this.base.delete(`requests/${id}`, {});
+  }
 }

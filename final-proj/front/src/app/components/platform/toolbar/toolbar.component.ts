@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class ToolbarComponent implements OnInit {
   name: string;
   visible = false;
+  isAdmin = localStorage.getItem('is_admin');
 
   constructor(private service: AuthService, private snackBar: MatSnackBar, private router: Router) { }
 
@@ -37,6 +38,7 @@ export class ToolbarComponent implements OnInit {
   onLogout() {
     this.service.logout().subscribe((resp) => {
       localStorage.removeItem('jwt');
+      localStorage.clear();
       this.router.navigate(['auth/login']);
     },
     (error) => {

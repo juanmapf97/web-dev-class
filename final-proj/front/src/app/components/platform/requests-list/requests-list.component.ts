@@ -24,6 +24,7 @@ export class RequestsListComponent implements OnInit {
   dataSource = this.ELEMENT_DATA;
   totalBoxes = 0;
   totalCost = 0;
+  isAdmin = (localStorage.getItem('is_admin') === 'true');
 
   constructor(private service: RequestsService, private snackBar: MatSnackBar, private router: Router) { }
 
@@ -62,5 +63,44 @@ export class RequestsListComponent implements OnInit {
 
   onNewClick() {
     this.router.navigate([`info-form`]);
+  }
+
+  onDeleteClick(request) {
+    this.service.deleteRequest(request.id).subscribe((response) => {
+      this.ELEMENT_DATA = [];
+      this.totalBoxes = 0;
+      this.totalCost = 0;
+      this.service.getRequests().subscribe((resp) => {
+        for (const req in resp) {
+          if (resp.hasOwnProperty(req)) {
+            const element = resp[req];
+            const cost = element.boxes.reduce((total, elem) => {
+              return total + elem.price;
+            }, 0);
+            this.ELEMENT_DATA = this.ELEMENT_DATA.concat({
+              id: element._id,
+              boxes: element.boxes.length,
+              status: statuses[element.status],
+              time: element.pickup_time,
+              cost
+            });
+            this.totalBoxes += element.boxes.length;
+            this.totalCost += cost;
+          }
+        }
+        this.dataSource = this.ELEMENT_DATA;
+      },
+      (error) => {
+        this.snackBar.open(error.error.error, 'Ok', {
+          duration: 2000,
+          horizontalPosition: 'right'
+        });
+      });
+    }, (error) => {
+      this.snackBar.open(error.error.error, 'Ok', {
+        duration: 2000,
+        horizontalPosition: 'right'
+      });
+    });
   }
 }

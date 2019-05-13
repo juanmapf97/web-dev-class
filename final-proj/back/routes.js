@@ -19,6 +19,7 @@ router.get('/requests/:id', auth, request.getRequest)
 router.get('/requests', auth, request.getRequests)
 router.post('/requests', auth, request.createRequest)
 router.patch('/requests/:id', auth, request.updateRequest)
+router.delete('/requests/:id', auth, request.deleteRequest)
 
 router.get('/boxes/:id', auth, boxes.getRequestBoxes)
 

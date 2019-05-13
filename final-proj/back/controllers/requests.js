@@ -62,12 +62,21 @@ const getRequests = function(req, res) {
 }
 
 const getRequest = function(req, res) {
-    const _id = req.params.id;
-    Request.findOne({ _id, createdBy: req.user._id }).populate('boxes').then((request) => {
-        return res.send(request);
-    }).catch((error) => {
-        return res.status(400).send(error);
-    })
+    if (req.user.is_admin) {
+        const _id = req.params.id;
+        Request.findOne({ _id }).populate('boxes').then((request) => {
+            return res.send(request);
+        }).catch((error) => {
+            return res.status(400).send(error);
+        })
+    } else {
+        const _id = req.params.id;
+        Request.findOne({ _id, createdBy: req.user._id }).populate('boxes').then((request) => {
+            return res.send(request);
+        }).catch((error) => {
+            return res.status(400).send(error);
+        })
+    }
 }
 
 const updateRequest = function(req, res) {
@@ -114,9 +123,29 @@ const updateRequest = function(req, res) {
     }
 }
 
+const deleteRequest = function(req, res) {
+    if (req.user.is_admin) {
+        const _id = req.params.id;
+        Box.deleteMany({request_id: _id}).then((value) => {
+            Request.deleteOne({_id}).then((value) => {
+                return res.send()
+            }).catch((error) => {
+                return res.status(400).send(error);
+            })
+        }).catch((error) => {
+            return res.status(400).send(error);
+        });
+    } else {
+        return res.status(400).send({
+            error: 'Must be admin to delete'
+        })
+    }
+}
+
 module.exports = {
     createRequest: createRequest,
     getRequests: getRequests,
     getRequest: getRequest,
-    updateRequest: updateRequest
+    updateRequest: updateRequest,
+    deleteRequest: deleteRequest
 }

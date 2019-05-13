@@ -78,10 +78,13 @@ export class BaseService {
    * @returns An Observable of the response from the server
    */
   delete(path: string, body: any) {
-    // const httpOptions = {
-    //   body,
-    //   headers:
-    // };
-    // return this.httpClient.delete(environment.apiEndpoint + path, httpOptions);
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('jwt');
+    headers = headers.append('Authorization', `Bearer ${token}`);
+    const httpOptions = {
+      body,
+      headers
+    };
+    return this.httpClient.delete(environment.apiEndpoint + path, httpOptions);
   }
 }

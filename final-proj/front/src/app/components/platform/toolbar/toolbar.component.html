@@ -4,7 +4,7 @@
   <span class="user-text" (click)="toggleVisible()">
     {{name}}
     <div class="options" *ngIf="visible">
-      <span class="option" (click)="onConfig()">Configuración</span>
+      <span class="option" (click)="onConfig()" *ngIf="!isAdmin">Configuración</span>
       <span class="option" (click)="onLogout()">Cerrar sesión</span>
     </div>
   </span>

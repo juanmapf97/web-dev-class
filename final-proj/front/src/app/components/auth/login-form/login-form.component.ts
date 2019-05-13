@@ -73,6 +73,7 @@ export class LoginFormComponent implements OnInit {
       this.service.login(this.email.value, this.password.value).subscribe(
         (resp) => {
           localStorage.setItem('jwt', resp.token);
+          localStorage.setItem('is_admin', resp.user.is_admin);
           this.router.navigate(['app']);
         },
         (error) => {
