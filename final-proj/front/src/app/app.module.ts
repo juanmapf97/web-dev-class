@@ -40,6 +40,8 @@ import { RequestDetailComponent } from './components/platform/request-detail/req
 import { CdkTableModule } from '@angular/cdk/table';
 import { ProfileComponent } from './components/platform/profile/profile.component';
 import { ContenteditableModule } from '@ng-stack/contenteditable';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { ContenteditableModule } from '@ng-stack/contenteditable';
     MatGridListModule,
     MatTableModule,
     HttpClientModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
