@@ -23,5 +23,5 @@ De esta manera, se contará con la aplicación ejecutando en el ambiente de desa
 ## Autores
 | Autor      |
 |-----------------
-|Juan Manuel Pérez |
-|Enrique García |
+|Juan Manuel Pérez | A00819815 |
+|Enrique García | A00818997 |
