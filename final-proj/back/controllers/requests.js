@@ -39,7 +39,11 @@ const createRequest = function(req, res) {
         }
         return res.send(request);
     }).catch((error) => {
-        return res.status(400).send(error);
+        return res.status(400).send(
+            { 
+                error: error,
+                message: 'Error al crear pedido. Intenta más tarde o revisa tus datos.'
+            })
     });
 }
 
@@ -48,7 +52,11 @@ const getRequests = function(req, res) {
         Request.find().populate('boxes').then((requests) => {
             return res.send(requests);
         }).catch((error) => {
-            return res.status(400).send(error);
+            return res.status(400).send(
+                { 
+                    error: error,
+                    message: 'Error al obtener tus pedidos. Intenta más tarde.'
+                })
         })
     } else {
         Request.find({ createdBy: req.user._id })
@@ -56,7 +64,11 @@ const getRequests = function(req, res) {
         .then((requests) => {
             return res.send(requests);
         }).catch((error) => {
-            return res.status(400).send(error);
+            return res.status(400).send(
+                { 
+                    error: error,
+                    message: 'Error al obtener tus pedidos. Intenta más tarde.'
+                })
         })
     }
 }
@@ -67,14 +79,22 @@ const getRequest = function(req, res) {
         Request.findOne({ _id }).populate('boxes').then((request) => {
             return res.send(request);
         }).catch((error) => {
-            return res.status(400).send(error);
+            return res.status(400).send(
+                { 
+                    error: error,
+                    message: 'Error al obtener tu pedido. Intenta más tarde.'
+                })
         })
     } else {
         const _id = req.params.id;
         Request.findOne({ _id, createdBy: req.user._id }).populate('boxes').then((request) => {
             return res.send(request);
         }).catch((error) => {
-            return res.status(400).send(error);
+            return res.status(400).send(
+                { 
+                    error: error,
+                    message: 'Error al obtener tu pedido. Intenta más tarde.'
+                })
         })
     }
 }
@@ -89,16 +109,24 @@ const updateRequest = function(req, res) {
     
         if( !isValidUpdate ) {
             return res.status(400).send({
-                error: 'Invalid update, only allowed to update: ' + allowedUpdates
+                error: 'Invalid update, only allowed to update: ' + allowedUpdates,
+                message: 'Un campo que intentaste actualizar no está permitido'
             })
         }
         Request.findByIdAndUpdate(_id, req.body ).then((request) => {
             if (!request) {
-                return res.status(404).send()
+                return res.status(404).send({
+                    error: 'error',
+                    message: 'El pedido que intentas actualizar no existe.'
+                })
             }
             return res.send(request)
         }).catch(function(error) {
-            res.status(500).send(error)
+            return res.status(500).send(
+                { 
+                    error: error,
+                    message: 'Ocurrió un error inesperado'
+                })
         })
     } else {
         const _id = req.params.id
@@ -109,16 +137,24 @@ const updateRequest = function(req, res) {
     
         if( !isValidUpdate ) {
             return res.status(400).send({
-                error: 'Invalid update, only allowed to update: ' + allowedUpdates
+                error: 'Invalid update, only allowed to update: ' + allowedUpdates,
+                message: 'Un campo que intentaste actualizar no está permitido'
             })
         }
         Request.findByIdAndUpdate(_id, req.body ).then((request) => {
             if (!request) {
-                return res.status(404).send()
+                return res.status(404).send({
+                    error: 'error',
+                    message: 'El pedido que intentas actualizar no existe.'
+                })
             }
             return res.send(request)
         }).catch(function(error) {
-            res.status(500).send(error)
+            return res.status(500).send(
+                { 
+                    error: error,
+                    message: 'Ocurrió un error inesperado'
+                })
         })
     }
 }
@@ -137,7 +173,8 @@ const deleteRequest = function(req, res) {
         });
     } else {
         return res.status(400).send({
-            error: 'Must be admin to delete'
+            error: 'Must be admin to delete',
+            message: 'Se requiere ser administrador para hacer esto.'
         })
     }
 }
