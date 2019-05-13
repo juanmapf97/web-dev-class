@@ -62,6 +62,13 @@ Notarás que para agendar un envío no es necesario seleccionar qué cajas, esto
 
 Cuando termines el proceso de agendar un envío, volverás a la pantalla de detalle del pedido, pero esta vez se verán campos extras en la sección de "Información General" con los datos de envío.
 
+### Editar cuenta
+En la pantalla de lista de pedidos, al seleccionar la opción superior derecha, donde dice tu nombre, aparecen tres opciones, "Mis Pedidos", que abre la pantalla de lista de pedidos; "Configuración", para editar cuenta; y "Cerrar sesión" para cerrar la sesión y volver a la pantalla de inicio de sesión. Si se selecciona la opción de "Configuración" la siguiente pantalla aparece:
+![Editar cuenta](./storage_images/editar_cuenta.png)
+
+Si se selecciona el botón "Editar cuenta" los campos serán editables y se podrá cambiar los datos de la cuenta:
+![Editar cuenta 2](./storage_images/editar_cuenta2.png)
+
 ## Autores
 | Autor      | Correo |
 |----------------- | --------------- |
