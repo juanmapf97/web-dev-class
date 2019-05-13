@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RequestsService } from 'src/app/services/platform/requests.service';
 import { MatSnackBar } from '@angular/material';
 
@@ -12,7 +12,7 @@ export class RequestDetailComponent implements OnInit {
   request: any;
   totalPrice = 0;
 
-  constructor(private route: ActivatedRoute, private service: RequestsService, private snackBar: MatSnackBar) { }
+  constructor(private route: ActivatedRoute, private service: RequestsService, private snackBar: MatSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -32,7 +32,7 @@ export class RequestDetailComponent implements OnInit {
   }
 
   onScheduleClick() {
-    
+    this.router.navigate(['receive-form']);
   }
 
 }
