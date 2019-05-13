@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth-guard.service';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { InfoFormComponent } from './components/info-form/info-form.component';
@@ -16,11 +17,13 @@ const routes: Routes = [
   },
   {
     path: 'app/requests',
-    component: RequestsListComponent
+    component: RequestsListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'app/detail/:id',
-    component: RequestDetailComponent
+    component: RequestDetailComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth/login',
@@ -28,15 +31,17 @@ const routes: Routes = [
   },
   {
     path: 'auth/registration',
-    component: RegistrationFormComponent
+    component: RegistrationFormComponent,
   },
   {
     path: 'info-form',
-    component: InfoFormComponent
+    component: InfoFormComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'receive-form',
-    component: ReceiveFormComponent
+    component: ReceiveFormComponent,
+    canActivate: [AuthGuard]
   },
 ];
 
