@@ -39,7 +39,6 @@ import { ToolbarComponent } from './components/platform/toolbar/toolbar.componen
 import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
 import { CdkTableModule } from '@angular/cdk/table';
 import { ProfileComponent } from './components/platform/profile/profile.component';
-import { ContenteditableModule } from '@ng-stack/contenteditable';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -58,7 +57,6 @@ import { environment } from '../environments/environment';
   imports: [
     BrowserModule,
     MatDatepickerModule,
-    ContenteditableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
