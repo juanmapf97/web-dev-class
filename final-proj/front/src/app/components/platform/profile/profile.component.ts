@@ -106,9 +106,6 @@ export class ProfileComponent implements OnInit {
            this.confirmPassword.hasError('matchingPassword') ? 'Las contraseñas deben de coincidir' : '';
   }
 
-  templateDrivenForm = 'This is contenteditable text for template-driven form';
-  myControl = new FormControl;
-
   constructor(private service: UserService, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
@@ -119,7 +116,6 @@ export class ProfileComponent implements OnInit {
         email: resp.email,
         password: '**************'
     }
-    this.myControl.setValue(`This is contenteditable text for reactive form`);
   },
     (error) => {
       this.snackBar.open(error.error.error, 'Ok', {
@@ -157,13 +153,18 @@ export class ProfileComponent implements OnInit {
     } else {
       if (this.updateForm.valid) {
         this.service.patchUserSelf({
-          username: this.email.value,
+          email: this.email.value,
           password: this.password.value,
           first_name: this.firstName.value,
           last_name: this.lastName.value
         }).subscribe(
           (resp) => {
-            localStorage.setItem('jwt', resp.token);
+            this.user = {
+              email: this.email.value,
+              password: '**************',
+              first_name: this.firstName.value,
+              last_name: this.lastName.value
+            }
             this.onClick()
           },
           (error) => {

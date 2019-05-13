@@ -49,8 +49,12 @@ export class ToolbarComponent implements OnInit {
     });
   }
 
-  onConfig() {
+  onRequests() {
+    this.router.navigate(['app/requests']);
+  }
 
+  onConfig() {
+    this.router.navigate(['profile']);
   }
 
 }
