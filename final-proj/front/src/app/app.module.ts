@@ -38,7 +38,8 @@ import { RequestsListComponent } from './components/platform/requests-list/reque
 import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
 import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
 import { CdkTableModule } from '@angular/cdk/table';
-
+import { ProfileComponent } from './components/platform/profile/profile.component';
+import { ContenteditableModule } from '@ng-stack/contenteditable';
 
 @NgModule({
   declarations: [
@@ -49,11 +50,13 @@ import { CdkTableModule } from '@angular/cdk/table';
     RequestsListComponent,
     ToolbarComponent,
     RequestDetailComponent,
-    ReceiveFormComponent
+    ReceiveFormComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
     MatDatepickerModule,
+    ContenteditableModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
