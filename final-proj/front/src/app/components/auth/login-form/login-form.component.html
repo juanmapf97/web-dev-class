@@ -18,10 +18,10 @@
         <mat-icon class="material-icons-outlined icon" matSuffix>vpn_key</mat-icon>
         <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
       </mat-form-field>
-      <div class="remember">
+      <!-- <div class="remember">
         <mat-checkbox class="checkbox" formControlName="remember">Recordar cuenta</mat-checkbox>
         <a href="/auth/password-recovery" class="password-recovery">Recuperar contraseña</a>
-      </div>
+      </div> -->
       <button mat-raised-button (click)="onLoginClick()">INICIAR SESIÓN</button>
       <div class="register">
         <p>¿No tienes cuenta?</p>
