@@ -20,7 +20,7 @@ export class ToolbarComponent implements OnInit {
       this.name = `${resp.first_name} ${resp.last_name}`;
     },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });
@@ -42,7 +42,7 @@ export class ToolbarComponent implements OnInit {
       this.router.navigate(['auth/login']);
     },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });

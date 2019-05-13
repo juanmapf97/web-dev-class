@@ -350,7 +350,7 @@ export class ReceiveFormComponent implements OnInit {
       this.router.navigate([`app/detail/${this.requestId}`]);
     },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });

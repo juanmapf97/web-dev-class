@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: '*',
+    path: '**',
     redirectTo: 'app/requests'
   },
 ];

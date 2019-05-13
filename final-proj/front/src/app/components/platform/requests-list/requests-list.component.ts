@@ -50,7 +50,7 @@ export class RequestsListComponent implements OnInit {
       this.dataSource = this.ELEMENT_DATA;
     },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });
@@ -91,13 +91,13 @@ export class RequestsListComponent implements OnInit {
         this.dataSource = this.ELEMENT_DATA;
       },
       (error) => {
-        this.snackBar.open(error.error.error, 'Ok', {
+        this.snackBar.open(error.error.message, 'Ok', {
           duration: 2000,
           horizontalPosition: 'right'
         });
       });
     }, (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });

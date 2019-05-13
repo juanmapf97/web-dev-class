@@ -353,7 +353,7 @@ export class InfoFormComponent implements OnInit {
       this.router.navigate(['app/requests']);
     },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'
       });

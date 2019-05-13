@@ -118,7 +118,7 @@ export class ProfileComponent implements OnInit {
     }
   },
     (error) => {
-      this.snackBar.open(error.error.error, 'Ok', {
+      this.snackBar.open(error.error.message, 'Ok', {
         duration: 2000,
         horizontalPosition: 'right'})
     }
