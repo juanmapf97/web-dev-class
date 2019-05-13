@@ -1,0 +1,22 @@
+.main-section {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+}
+
+.boxes-list {
+    width: 75%;
+    padding: 35px;
+}
+
+.payment-section {
+    width: 25%;
+    padding: 35px;
+}
+
+.payment-summary {
+    // width: 100%;
+    // height: 100%;
+    margin: auto;
+}

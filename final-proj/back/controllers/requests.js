@@ -45,13 +45,15 @@ const createRequest = function(req, res) {
 
 const getRequests = function(req, res) {
     if (req.user.is_admin) {
-        Request.find().then((requests) => {
+        Request.find().populate('boxes').then((requests) => {
             return res.send(requests);
         }).catch((error) => {
             return res.status(400).send(error);
         })
     } else {
-        Request.find({ createdBy: req.user._id }).then((requests) => {
+        Request.find({ createdBy: req.user._id })
+        .populate('boxes')
+        .then((requests) => {
             return res.send(requests);
         }).catch((error) => {
             return res.status(400).send(error);

@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const Box = require('./box');
 
 const statuses = [ 'Pending pickup', 'Picked up', 'In Storage' ];
 // {
@@ -8,6 +9,18 @@ const statuses = [ 'Pending pickup', 'Picked up', 'In Storage' ];
 // }
 
 const requestSchema = new mongoose.Schema({
+    giver_first_name: {
+        type: String,
+        required: true
+    },
+    giver_last_name: {
+        type: String,
+        required: true
+    },
+    giver_phone: {
+        type: String,
+        required: true
+    },
     status: {
         type: Number,
         required: true,
@@ -17,9 +30,35 @@ const requestSchema = new mongoose.Schema({
         type: String,
         default: statuses[0]
     },
-    time: {
+    pickup_time: {
         type: Date,
         required: true
+    },
+    receive_time: {
+        type: Date
+    },
+    street: {
+        type: String,
+        required: true
+    },
+    street_info: {
+        type: String,
+        required: true
+    },
+    colony: {
+        type: String,
+        required: true
+    },
+    state: {
+        type: String,
+        required: true
+    },
+    postal_code: {
+        type: String,
+        required: true
+    },
+    comments: {
+        type: String
     },
     latitude: {
         type: Number,
@@ -34,12 +73,6 @@ const requestSchema = new mongoose.Schema({
         required: true
     }
 });
-
-// requestSchema.virtual('request_boxes', {
-//     ref: 'RequestBoxes',
-//     localField: '_id',
-//     foreignField: 'request_id'
-// });
 
 requestSchema.virtual('boxes', {
     ref: 'Box',

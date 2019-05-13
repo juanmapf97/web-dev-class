@@ -1,0 +1,526 @@
+<div class="container horizontal">
+  <div class="decoration">
+
+
+            <!-- HORIZONTAL STEPPER  -->
+
+              <mat-horizontal-stepper class="form-container" [linear]="true">
+
+                <mat-step [stepControl]="step2Form">
+                    <form fxLayout="column" [formGroup]="step2Form">
+                        <ng-template matStepLabel>Dirección</ng-template>
+
+                          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" >
+                            <mat-form-field appearance="outline" fxFlex="50" class="form-field address">
+                                <mat-label>Calle y número</mat-label>
+                                <input matInput formControlName="address" maxlength="70" [value]="address.value" required>
+                                <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+                                <mat-error>Información Necesaria!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="50" class="form-field hint">
+                                <mat-label>Piso, puerta, edificio, etc.</mat-label>
+                                <input matInput formControlName="hint" [value]="hint.value">
+                                <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+                            </mat-form-field>
+                          </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                              <mat-form-field appearance="outline" fxFlex="33" class="form-field city">
+                                  <mat-label>Municipio</mat-label>
+                                  <input matInput formControlName="city" [value]="city.value" required>
+                                  <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                  <mat-error *ngIf="city.invalid">{{getcityErrorMessage()}}</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field appearance="outline" fxFlex="100" class="form-field state">
+                                  <mat-label>Estado</mat-label>
+                                  <mat-select formControlName="state" [value]="state.value" required>
+                                  <mat-option *ngFor="let state of states" [value]="state">
+                                      {{state}}
+                                  </mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                  <mat-error>Información Necesaria!</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field appearance="outline" fxFlex="33" class="form-field postalCode">
+                                  <mat-label>CP</mat-label>
+                                  <input matInput
+                                         formControlName="postalCode" maxlength="5" [value]="postalCode.value" required>
+                                  <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
+                                  <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                                  <mat-error *ngIf="postalCode.invalid">{{getpostalCodeErrorMessage()}}</mat-error>
+                              </mat-form-field>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                              <button mat-raised-button matStepperNext type="button" color="accent" class="button btn">
+                                Siguiente
+                              </button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+
+
+
+                <mat-step [stepControl]="step3Form">
+                    <form fxLayout="column" [formGroup]="step3Form">
+                        <ng-template matStepLabel>Recolección</ng-template>
+                          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                            <div class="header1"> Especifica el dia y la hora en la que te gustaria que pasemos por tus cosas </div>
+                                <mat-form-field appearance="outline" fxFlex="33" class="form-field date" >
+                                  <input matInput [matDatepicker]="myDatepicker" (click)="onClick1()" formControlName="date" [min]="today" time="false" [value]="date.value" required>
+                                  <mat-label>Fecha</mat-label>
+                                  <mat-datepicker-toggle matSuffix id="horizontal" class="toggle" [for]="myDatepicker"></mat-datepicker-toggle>
+                                  <mat-datepicker #myDatepicker></mat-datepicker>
+                                  <mat-error>Información Necesaria!</mat-error>
+                                  </mat-form-field>
+
+
+                                <mat-form-field appearance="outline" fxFlex="100" class="form-field time">
+                                  <mat-label>Hora</mat-label>
+                                  <mat-select formControlName="time" [value]="time.value" required>
+                                      <mat-option [value]="'16:30'">
+                                          16:30
+                                      </mat-option>
+                                      <mat-option [value]="'17:00'">
+                                          17:00
+                                      </mat-option>
+                                      <mat-option [value]="'17:30'">
+                                          17:30
+                                      </mat-option>
+                                      <mat-option [value]="'18:00'">
+                                          18:00
+                                      </mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+                                  <mat-error>Información Necesaria!</mat-error>
+                                </mat-form-field>
+                          </div>
+
+
+
+                      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                        <mat-form-field appearance="outline" fxFlex="100" class="form-field comments">
+                            <mat-label>Comentarios adicionales para la facil ubicación del domicilio..</mat-label>
+                            <textarea rows="7" matInput formControlName="comments" [value]="comments.value">
+                                ...
+                            </textarea>
+                        </mat-form-field>
+                      </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn3">
+                                Anterior
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" class="button_right btn3">
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <mat-step>
+
+                    <ng-template matStepLabel>Finalizar</ng-template>
+
+                      <div class="info-container" fxLayout="row wrap">
+
+
+
+
+                          <div class="row">
+                            <div class="column">
+                              <div class="content">
+
+                                <div class="info-line">
+                                    <div class="title">Nombre <mat-icon matSuffix class="icon">account_circle</mat-icon></div>
+                                    <div class="info">{{firstName.value}} {{lastName.value}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title">Dirección<mat-icon matSuffix class="icon">location_on</mat-icon></div>
+                                    <div class="info">{{address.value | slice:0:70}} {{city.value}}, {{state.value}} {{postalCode.value}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title">Teléfono <mat-icon matSuffix class="icon">phone_android</mat-icon> </div>
+                                    <div class="info">{{ telephone.value }}</div>
+                                </div>
+
+
+
+
+                                </div>
+                              </div>
+
+
+                              <div class="column">
+                                <div class="content">
+
+                                  <div class="info-line">
+                                      <div class="title">Fecha de Recolección <mat-icon matSuffix class="icon">calendar_today</mat-icon></div>
+                                      <div class="info">{{date.value|date:"shortDate"}} </div>
+                                  </div>
+
+
+                                  <div class="info-line">
+                                      <div class="title">Hora de Recolección <mat-icon matSuffix class="icon">access_time</mat-icon></div>
+                                      <div class="info">{{time.value}}</div>
+                                  </div>
+
+                                  <div class="info-line">
+                                      <div class="title">Cantidad de cajas <mat-icon matSuffix class="icon">all_inbox</mat-icon> </div>
+                                      <div class="info">{{ data.length }}</div>
+                                  </div>
+
+
+
+                                  </div>
+                                </div>
+                            </div>
+
+                      </div>
+
+
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                          <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn4">
+                              Anterior
+                          </button>
+                          <button mat-raised-button type="button" color="accent" (click)="finishForm()" class="button_right btn4">
+                              Finalizar
+                          </button>
+                      </div>
+
+                </mat-step>
+
+              </mat-horizontal-stepper>
+
+
+
+  </div>
+</div>
+
+<!-- VERTICAL STEPPER WILL ONLY BE DISPLAYED IF THE SCREEN IS ABOVE 600PX -->
+
+<div class="container vertical">
+  <div class="decoration">
+
+              <mat-vertical-stepper class="form-container vertical" [linear]="true">
+
+                <mat-step [stepControl]="step1Form">
+                  <form fxLayout="column" [formGroup]="step1Form">
+
+                      <ng-template  class="step" matStepLabel>General</ng-template>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" >
+                          <mat-form-field appearance="outline" fxFlex="50" class="form-field firstName">
+                              <mat-label>Nombre</mat-label>
+                              <input matInput  formControlName="firstName" maxlength="35" [value]="firstName.value" required>
+                              <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                              <mat-error *ngIf="firstName.invalid">{{getfirstNameErrorMessage()}}</mat-error>
+                          </mat-form-field>
+
+
+                          <mat-form-field appearance="outline" fxFlex="50" class="form-field lastName">
+                              <mat-label>Apellido</mat-label>
+                              <input matInput formControlName="lastName" maxlength="35" [value]="lastName.value" required>
+                              <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+                              <mat-error *ngIf="lastName.invalid">{{getlastNameErrorMessage()}}</mat-error>
+                          </mat-form-field>
+                        </div>
+
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" >
+                          <mat-form-field appearance="outline" fxFlex="50" class="form-field telephone">
+                              <mat-label>Número de Teléfono</mat-label>
+                              <input matInput formControlName="telephone" maxlength="16" [value]="telephone.value" required>
+                              <mat-icon matSuffix class="secondary-text">phone_android</mat-icon>
+                              <mat-error *ngIf="telephone.invalid">{{gettelephoneErrorMessage()}}</mat-error>
+                          </mat-form-field>
+                        </div>
+
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                          <button mat-raised-button matStepperNext type="button" color="accent" class="button btn" (click)="getfirstNameErrorMessage()">
+                              Siguiente
+                          </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+
+                <mat-step [stepControl]="step2Form">
+                    <form fxLayout="column" [formGroup]="step2Form">
+                        <ng-template matStepLabel>Dirección</ng-template>
+
+                          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" >
+                            <mat-form-field appearance="outline" fxFlex="50" class="form-field address">
+                                <mat-label>Calle y número</mat-label>
+                                <input matInput formControlName="address" maxlength="70" [value]="address.value" required>
+                                <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+                                <mat-error>Información Necesaria!</mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" fxFlex="50" class="form-field hint">
+                                <mat-label>Piso, puerta, edificio, etc.</mat-label>
+                                <input matInput formControlName="hint" [value]="hint.value" >
+                                <mat-icon matSuffix class="secondary-text">location_on</mat-icon>
+                            </mat-form-field>
+                          </div>
+
+                            <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                              <mat-form-field appearance="outline" fxFlex="33" class="form-field city">
+                                  <mat-label>Municipio</mat-label>
+                                  <input matInput formControlName="city" maxlength="30" [value]="city.value" required>
+                                  <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                  <mat-error *ngIf="city.invalid">{{getcityErrorMessage()}}</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field appearance="outline" fxFlex="100" class="form-field state">
+                                  <mat-label>Estado</mat-label>
+                                  <mat-select formControlName="state" [value]="state.value" required>
+                                  <mat-option *ngFor="let state of states" [value]="state">
+                                      {{state}}
+                                  </mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix class="secondary-text">location_city</mat-icon>
+                                  <mat-error>Información Necesaria!</mat-error>
+                              </mat-form-field>
+
+                              <mat-form-field appearance="outline" fxFlex="33" class="form-field postalCode">
+                                  <mat-label>CP</mat-label>
+                                  <input matInput
+                                        formControlName="postalCode" maxlength="5" [value]="postalCode.value" required>
+                                  <mat-icon matSuffix class="secondary-text">markunread_mailbox</mat-icon>
+                                  <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                                  <mat-error *ngIf="postalCode.invalid">{{getpostalCodeErrorMessage()}}</mat-error>
+                              </mat-form-field>
+                            </div>
+
+
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                              <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn2">
+                                  Anterior
+                              </button>
+                              <button mat-raised-button matStepperNext type="button" color="accent" class="button_right btn2">
+                                Siguiente
+                              </button>
+                            </div>
+                        </form>
+                    </mat-step>
+
+
+
+
+                <mat-step [stepControl]="step3Form">
+                    <form fxLayout="column" [formGroup]="step3Form">
+                        <ng-template matStepLabel>Recolección</ng-template>
+                          <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                            <div class="header1"> Especifica el dia y la hora en la que te gustaria que pasemos por tus cosas </div>
+                                <mat-form-field appearance="outline" fxFlex="33" class="form-field date" >
+                                  <input matInput [matDatepicker]="myDatepicker2" (click)="onClick2()" formControlName="date" [min]="today" time="false" [value]="date.value" required>
+                                  <mat-label>Fecha</mat-label>
+                                  <mat-datepicker-toggle matSuffix id="vertical" class="toggle" [for]="myDatepicker2"></mat-datepicker-toggle>
+                                  <mat-datepicker #myDatepicker2></mat-datepicker>
+                                  <mat-error>Información Necesaria!</mat-error>
+                                  </mat-form-field>
+
+
+                                <mat-form-field appearance="outline" fxFlex="100" class="form-field time">
+                                  <mat-label>Hora</mat-label>
+                                  <mat-select formControlName="time" [value]="time.value" required>
+                                      <mat-option [value]="'16:30'">
+                                          16:30
+                                      </mat-option>
+                                      <mat-option [value]="'17:00'">
+                                          17:00
+                                      </mat-option>
+                                      <mat-option [value]="'17:30'">
+                                          17:30
+                                      </mat-option>
+                                      <mat-option [value]="'18:00'">
+                                          18:00
+                                      </mat-option>
+                                  </mat-select>
+                                  <mat-icon matSuffix class="secondary-text">access_time</mat-icon>
+                                  <mat-error>Información Necesaria!</mat-error>
+                                </mat-form-field>
+                          </div>
+
+
+
+                      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+                        <mat-form-field appearance="outline" fxFlex="100" class="form-field comments">
+                            <mat-label>Comentarios adicionales para la facil ubicación del domicilio..</mat-label>
+                            <textarea rows="7" matInput formControlName="comments" [value]="comments.value">
+                                ...
+                            </textarea>
+                        </mat-form-field>
+                      </div>
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn3">
+                                Anterior
+                            </button>
+                            <button mat-raised-button matStepperNext type="button" color="accent" class="button_right btn3">
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </mat-step>
+
+                <mat-step [stepControl]="step4Form">
+                  <form fxLayout="column" [formGroup]="step4Form">
+                      <ng-template matStepLabel>Cajas</ng-template>
+                        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+
+                          <div class="header1"> Agrega cajas y su información </div>  
+                        </div>
+
+                        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 list">
+
+                            <!-- Checkbox Column -->
+                            <ng-container matColumnDef="select">
+                              <th mat-header-cell *matHeaderCellDef>
+                                <!-- <mat-checkbox (change)="$event ? masterToggle() : null"
+                                              [checked]="selection.hasValue() && isAllSelected()"
+                                              [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                              [aria-label]="checkboxLabel()">
+                                </mat-checkbox> -->
+                              </th>
+                              <td mat-cell *matCellDef="let row">
+                                <mat-checkbox (click)="$event.stopPropagation()"
+                                              (change)="$event ? selection.toggle(row) : null"
+                                              [checked]="selection.isSelected(row)"
+                                              [aria-label]="checkboxLabel(row)">
+                                </mat-checkbox>
+                              </td>
+                            </ng-container>
+
+                            <!-- Position Column -->
+                            <ng-container matColumnDef="position">
+                                <th mat-header-cell *matHeaderCellDef> No. </th>
+                                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                              </ng-container>
+                    
+                            <!-- Size Column -->
+                            <ng-container matColumnDef="boxsize">
+                                <th mat-header-cell *matHeaderCellDef> Tamaño </th>
+                                <td mat-cell *matCellDef="let element"> {{element.boxsize}} </td>
+                              </ng-container>
+
+                            <!-- Description Column -->
+                            <ng-container matColumnDef="desc">
+                                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                                <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+                              </ng-container>
+                          
+                          
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+                                (click)="selection.toggle(row)">
+                            </tr>
+                          </table>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button *ngIf="selected()" (click)="removeSelectedRows()" type="button" color="accent" class="button_minus">
+                            <mat-icon matSuffix class="secondary-text">remove_circle_outline</mat-icon>
+                        </button>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                    </div>
+
+                    <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" >
+                        <mat-form-field appearance="outline" fxFlex="50" class="form-field boxsize">
+                            <mat-label>Tamaño</mat-label>
+                            <input matInput formControlName="boxsize" maxlength="16" [value]="boxsize?.value" required>
+                            <mat-icon matSuffix class="secondary-text">photo_size_select_small</mat-icon>
+                            <mat-error *ngIf="boxsize?.invalid">{{getsizeErrorMessage()}}</mat-error>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" fxFlex="50" class="form-field desc">
+                            <mat-label>Descripción</mat-label>
+                                <textarea rows="1" matInput formControlName="desc" [value]="desc?.value">
+                                    ...
+                                </textarea>
+                        </mat-form-field>
+                        <button mat-raised-button (click)="addBox()" type="button" color="accent" class="button_plus">
+                            <mat-icon matSuffix class="secondary-text">add_circle_outline</mat-icon>
+                        </button>
+                      </div>
+
+                      <div fxLayout="row" fxLayoutAlign="center center">
+                          <button mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn3">
+                              Anterior
+                          </button>
+                          <button mat-raised-button matStepperNext type="button" color="accent" class="button_right btn3">
+                              Siguiente
+                          </button>
+                      </div>
+                  </form>
+              </mat-step>
+
+                <mat-step>
+
+                    <ng-template matStepLabel>Finalizar</ng-template>
+
+                      <div class="info-container" fxLayout="row wrap">
+
+
+
+
+                          <div class="row">
+
+                              <div class="content">
+
+                                <div class="info-line">
+                                    <div class="title">Nombre <mat-icon matSuffix class="icon">account_circle</mat-icon></div>
+                                    <div class="info">{{firstName.value}} {{lastName.value}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title">Dirección<mat-icon matSuffix class="icon">location_on</mat-icon></div>
+                                    <div class="info">{{address.value | slice:0:70}} {{city.value}}, {{state.value}} {{postalCode.value}}</div>
+                                </div>
+
+                                <div class="info-line">
+                                    <div class="title">Teléfono <mat-icon matSuffix class="icon">phone_android</mat-icon> </div>
+                                    <div class="info">{{ telephone.value }}</div>
+                                </div>
+
+                                  <div class="info-line">
+                                      <div class="title">Fecha de Recolección <mat-icon matSuffix class="icon">calendar_today</mat-icon></div>
+                                      <div class="info">{{date.value|date:"shortDate"}} </div>
+                                  </div>
+
+
+                                  <div class="info-line">
+                                      <div class="title">Hora de Recolección <mat-icon matSuffix class="icon">access_time</mat-icon></div>
+                                      <div class="info">{{time.value}}</div>
+                                  </div>
+
+                                </div>
+
+                            </div>
+
+                      </div>
+
+
+
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                          <button class="mr-8" mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn4">
+                              Anterior
+                          </button>
+                          <button mat-raised-button type="button" color="accent" (click)="finishForm()" class="button_right btn4">
+                              Finalizar
+                          </button>
+                      </div>
+
+                </mat-step>
+
+              </mat-vertical-stepper>
+  </div>
+</div>

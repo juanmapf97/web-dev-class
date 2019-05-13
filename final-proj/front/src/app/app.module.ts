@@ -9,17 +9,34 @@ import { AppComponent } from './app.component';
 import { LoginFormComponent } from './components/auth/login-form/login-form.component';
 import { RegistrationFormComponent } from './components/auth/registration-form/registration-form.component';
 import { MatSelectModule } from '@angular/material/select';
-import {  MatDatepickerModule, MatNativeDateModule, MatStepperModule } from '@angular/material';
+import {
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatListModule,
+  MatStepperModule,
+  MatToolbarModule,
+  MatCardModule,
+  MatGridListModule,
+  MatPaginatorModule
+} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 
 import { InfoFormComponent } from './components/info-form/info-form.component';
+import { ReceiveFormComponent } from './components/receive-form/receive-form.component';
 import {
+  MatBottomSheetModule,
   MatButtonModule,
   MatCheckboxModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
-  MatSnackBarModule } from '@angular/material';
+  MatSnackBarModule,
+  MatTableModule
+} from '@angular/material';
+import { RequestsListComponent } from './components/platform/requests-list/requests-list.component';
+import { ToolbarComponent } from './components/platform/toolbar/toolbar.component';
+import { RequestDetailComponent } from './components/platform/request-detail/request-detail.component';
+import { CdkTableModule } from '@angular/cdk/table';
 
 
 @NgModule({
@@ -28,7 +45,10 @@ import {
     LoginFormComponent,
     RegistrationFormComponent,
     InfoFormComponent,
-
+    RequestsListComponent,
+    ToolbarComponent,
+    RequestDetailComponent,
+    ReceiveFormComponent
   ],
   imports: [
     BrowserModule,
@@ -39,14 +59,22 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    CdkTableModule,
+    MatBottomSheetModule,
     MatCheckboxModule,
     MatSnackBarModule,
     FormsModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatListModule,
     MatNativeDateModule,
     MatStepperModule,
-    HttpClientModule
+    MatToolbarModule,
+    MatCardModule,
+    MatGridListModule,
+    MatTableModule,
+    HttpClientModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

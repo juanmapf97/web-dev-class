@@ -1,0 +1,12 @@
+<mat-toolbar color="primary">
+  <span>Storage</span>
+  <span class="fill"></span>
+  <span class="user-text" (click)="toggleVisible()">
+    {{name}}
+    <div class="options" *ngIf="visible">
+      <span class="option" (click)="onConfig()">Configuración</span>
+      <span class="option" (click)="onLogout()">Cerrar sesión</span>
+    </div>
+  </span>
+  <mat-icon style="cursor: pointer;" (click)="toggleVisible()">keyboard_arrow_down</mat-icon>
+</mat-toolbar>
