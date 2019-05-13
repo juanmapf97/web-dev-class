@@ -4,7 +4,7 @@
 
             <!-- HORIZONTAL STEPPER  -->
 
-              <mat-horizontal-stepper class="form-container" [linear]="true">
+              <mat-horizontal-stepper class="form-container" [linear]="true" #stepper>
 
                 <mat-step [stepControl]="step1Form">
                   <form fxLayout="column" [formGroup]="step1Form">
@@ -244,12 +244,13 @@
                               <mat-icon matSuffix class="secondary-text">add_circle_outline</mat-icon>
                           </button>
                         </div>
+                        <mat-error *ngIf="showError">Ingresa una caja</mat-error>
   
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <button mat-raised-button matStepperPrevious type="button" color="accent" class="button_left btn3">
                                 Anterior
                             </button>
-                            <button mat-raised-button matStepperNext type="button" color="accent" class="button_right btn3">
+                            <button mat-raised-button (click)="goForward(stepper)" type="button" color="accent" class="button_right btn3">
                                 Siguiente
                             </button>
                         </div>
